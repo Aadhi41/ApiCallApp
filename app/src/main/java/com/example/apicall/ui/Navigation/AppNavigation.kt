@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.apicall.ui.Models.ModelItem
-import com.example.apicall.ui.ProductScreen.ProductDetailScreen
+import com.example.apicall.ui.ProductScreen.detailscreen.ProductDetailScreen
 
 
 import com.google.gson.Gson
