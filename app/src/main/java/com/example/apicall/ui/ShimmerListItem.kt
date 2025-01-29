@@ -14,14 +14,16 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShimmerItem() {
-
+fun ShimmerItem(
+    shimmerSpeed: Int = 700,
+    shimmerColor: Color = Color.LightGray.copy(alpha = 0.6f)
+) {
     val shimmerTransition = rememberInfiniteTransition()
     val shimmerOffset by shimmerTransition.animateFloat(
         initialValue = -1f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 700, easing = LinearEasing), // Fast shimmer (700ms)
+            animation = tween(durationMillis = shimmerSpeed, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         )
     )
@@ -32,7 +34,7 @@ fun ShimmerItem() {
         Brush.horizontalGradient(
             colors = listOf(
                 Color.Gray.copy(alpha = 0.3f),
-                Color.LightGray.copy(alpha = 0.6f),
+                shimmerColor,
                 Color.Gray.copy(alpha = 0.3f)
             ),
             startX = shimmerOffset * 300f * density.density,
@@ -53,14 +55,19 @@ fun ShimmerItem() {
                 .height(150.dp)
                 .background(shimmerBrush)
         )
+
         Spacer(modifier = Modifier.height(12.dp))
+
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.7f)
                 .height(20.dp)
                 .background(shimmerBrush)
         )
+
         Spacer(modifier = Modifier.height(8.dp))
+
+
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.5f)

@@ -7,14 +7,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -37,15 +41,15 @@ fun ProductItem(
         Card(
             modifier = Modifier
                 .padding(8.dp)
-                .size(width = 180.dp, height = 300.dp) // Fixed card size
+                .size(width = 180.dp, height = 260.dp)
                 .clickable(onClick = onClick),
-            shape = RectangleShape, // Square edges for Netflix-like design
-            //elevation = 4.dp // Subtle shadow for depth
+            shape = RoundedCornerShape(12.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF9F8EF)) // Light background to match your theme
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Black) // Set card background to black
                     .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -55,26 +59,24 @@ fun ProductItem(
                         .height(180.dp)
                 ) {
                     AsyncImage(
-                        model = product.images.firstOrNull() ?: "", // Fallback to an empty string if null
+                        model = product.images.firstOrNull() ?: "",
                         contentDescription = product.title,
                         modifier = Modifier
                             .fillMaxSize()
-                            .graphicsLayer {
-                                shape = RectangleShape // Square edges for images
-                                clip = true
-                            }
-                            .border(BorderStroke(2.dp, Color.White)), // White border for polaroid effect
-                        contentScale = ContentScale.Crop
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(BorderStroke(2.dp, Color(0xFF78B3CE)),
+                                RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.Crop,
                     )
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = product.title,
-                    fontSize = 14.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = Color(0xFF78B3CE),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                    overflow = TextOverflow.Clip,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 4.dp)
@@ -84,12 +86,10 @@ fun ProductItem(
                     text = "$ ${product.price}",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
-                    color = Color.Red,
+                    color = Color(0xFFF96E2A),
                     modifier = Modifier.align(Alignment.Start)
                 )
             }
         }
     }
 }
-
-
