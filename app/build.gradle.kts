@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.litert.support.api)
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     implementation (libs.ui)

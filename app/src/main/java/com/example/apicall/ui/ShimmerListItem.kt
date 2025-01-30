@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ShimmerItem(
     shimmerSpeed: Int = 700,
-    shimmerColor: Color = Color.LightGray.copy(alpha = 0.6f)
+    shimmerColor: Color = Color.LightGray//.copy(alpha = 0.6f)
 ) {
     val shimmerTransition = rememberInfiniteTransition()
     val shimmerOffset by shimmerTransition.animateFloat(
