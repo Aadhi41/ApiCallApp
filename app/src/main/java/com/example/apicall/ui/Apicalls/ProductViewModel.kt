@@ -44,18 +44,13 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    fun postProduct() {
-        val product = ProductRequest(
-            title = "New Product",
-            price = 10,
-            description = "A description",
-            categoryId = 1,
-            images = listOf("https://placeimg.com/640/480/any")
-        )
-
+    fun postProduct(product: ProductRequest) {
         _isLoading.value = true
         RetrofitClient.apiService.postProduct(product).enqueue(object : Callback<ProductResponse> {
-            override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
+            override fun onResponse(
+                call: Call<ProductResponse>,
+                response: Response<ProductResponse>
+            ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -69,7 +64,8 @@ class ProductViewModel : ViewModel() {
                             creationAt = it.creationAt,
                             updatedAt = it.updatedAt
                         )
-                        _products.value = _products.value + newProduct
+
+                        _products.value += newProduct
                         _postSuccess.value = true
                         Log.d("ProductViewModel", "Product posted successfully: $newProduct")
                     }
