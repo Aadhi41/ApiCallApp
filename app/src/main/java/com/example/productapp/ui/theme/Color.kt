@@ -1,4 +1,4 @@
-package sree.ddukk.ProductApiApp.ui.theme
+package com.example.productapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

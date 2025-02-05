@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "ApiCall"
 include(":app")
+include(":app")
  
